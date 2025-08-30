@@ -523,33 +523,33 @@ input:checked + .slider:before {
 /* Responsive adjustments for small devices - make all items identical */
 @media (max-width: 768px) {
     .timeline-item:nth-child(even) {
-        padding-left: 3rem;
+        padding-left: 1.5rem;
         padding-right: 0;
         text-align: left;
         margin-right: 0;
     }
     
     .timeline-item:nth-child(even)::before {
-        left: 2rem;
+        left: 0.5rem;
         right: auto;
     }
     
     .timeline-item:nth-child(even)::after {
-        left: 2rem;
+        left: 0.5rem;
         right: auto;
     }
     
     .timeline-item:nth-child(odd) {
         margin-left: 0;
-        padding-left: 3rem;
+        padding-left: 1.5rem;
     }
     
     .timeline-item:nth-child(odd)::before {
-        left: 2rem;
+        left: 0.5rem;
     }
     
     .timeline-item:nth-child(odd)::after {
-        left: 2rem;
+        left: 0.5rem;
     }
 }
 
