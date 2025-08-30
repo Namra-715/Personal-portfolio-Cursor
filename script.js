@@ -635,35 +635,40 @@ function loadBackgroundWords() {
 function initBackgroundWords() {
     // Load words first, then initialize
     loadBackgroundWords().then(() => {
-        // Create words with much more staggered timing to prevent waves
-        let wordsCreated = 0;
+        // Start background words very early (1 second)
+        const heroAnimationDelay = 1000;
         
-        function createInitialWord() {
-            if (wordsCreated < maxWords) {
-                // Create word with random start stage to avoid synchronized lifecycles
-                createBackgroundWord(true);
-                wordsCreated++;
-                
-                // More aggressive creation to fill screen faster
-                const randomDelay = 50 + Math.random() * 300; // 0.05 to 0.35 seconds
-                setTimeout(createInitialWord, randomDelay);
-            } else {
-                // All initial words created, start the continuous replacement system
-                setInterval(() => {
-                    // Replace words that have finished their lifecycle
-                    if (activeWords.length < maxWords) {
-                        // Much more random timing to completely break up waves
-                        const randomGap = Math.random() * 2000; // 0 to 2 seconds random gap
-                        setTimeout(() => {
-                            createBackgroundWord(true);
-                        }, randomGap);
-                    }
-                }, 100); // Check more frequently for better distribution
+        setTimeout(() => {
+            // Create words with much more staggered timing to prevent waves
+            let wordsCreated = 0;
+            
+            function createInitialWord() {
+                if (wordsCreated < maxWords) {
+                    // Create word with random start stage to avoid synchronized lifecycles
+                    createBackgroundWord(true);
+                    wordsCreated++;
+                    
+                    // More aggressive creation to fill screen faster
+                    const randomDelay = 50 + Math.random() * 300; // 0.05 to 0.35 seconds
+                    setTimeout(createInitialWord, randomDelay);
+                } else {
+                    // All initial words created, start the continuous replacement system
+                    setInterval(() => {
+                        // Replace words that have finished their lifecycle
+                        if (activeWords.length < maxWords) {
+                            // Much more random timing to completely break up waves
+                            const randomGap = Math.random() * 2000; // 0 to 2 seconds random gap
+                            setTimeout(() => {
+                                createBackgroundWord(true);
+                            }, randomGap);
+                        }
+                    }, 100); // Check more frequently for better distribution
+                }
             }
-        }
-        
-        // Start creating initial words after a very short delay
-        setTimeout(createInitialWord, 100);
+            
+            // Start creating initial words after hero animation completes
+            createInitialWord();
+        }, heroAnimationDelay);
     });
     
     // CSS animations handle all timing automatically - no manual tracking needed

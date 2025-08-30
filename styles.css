@@ -11,10 +11,11 @@
     --bg-word-color: rgba(255, 255, 255, 0.7);
     --toggle-bg: #ffffff;
     --toggle-circle: #000000;
-    --info-text-color: #ffffff;
+    --info-text-color: #000000;
     --tooltip-bg: rgba(0, 0, 0, 0.9);
     --tooltip-text: #ffffff;
     --project-arrow-color: #ffffff;
+    --info-circle-bg: rgba(255, 255, 255, 0.9);
 }
 
 [data-theme="light"] {
@@ -29,10 +30,11 @@
     --bg-word-color: rgba(0, 0, 0, 0.7);
     --toggle-bg: #000000;
     --toggle-circle: #ffffff;
-    --info-text-color: #000000;
+    --info-text-color: #ffffff;
     --tooltip-bg: rgba(255, 255, 255, 0.95);
     --tooltip-text: #000000;
     --project-arrow-color: #000000;
+    --info-circle-bg: rgba(0, 0, 0, 0.9);
 }
 
 /* Reset and base styles */
@@ -250,8 +252,8 @@ input:checked + .slider:before {
     position: absolute;
     bottom: 2rem;
     left: 2rem;
-    width: 32px;
-    height: 32px;
+    width: 24px;
+    height: 24px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -259,6 +261,9 @@ input:checked + .slider:before {
     transition: all 0.3s ease;
     z-index: 100;
     animation: attentionJump 2s ease-in-out infinite;
+    background: var(--info-circle-bg);
+    border-radius: 50%;
+    padding: 2px;
 }
 
 /* Attention-grabbing jump animation */
@@ -278,8 +283,8 @@ input:checked + .slider:before {
 .info-icon::before {
     content: '';
     position: absolute;
-    width: 32px;
-    height: 32px;
+    width: 24px;
+    height: 24px;
     border-radius: 50%;
     background: transparent;
     cursor: pointer;
@@ -293,7 +298,7 @@ input:checked + .slider:before {
 .info-text {
     color: var(--info-text-color);
     font-weight: 600;
-    font-size: 16px;
+    font-size: 14px;
     user-select: none;
 }
 
@@ -513,6 +518,39 @@ input:checked + .slider:before {
     height: 2rem;
     background: var(--bg-primary);
     transition: transform 0.3s ease;
+}
+
+/* Responsive adjustments for small devices - make all items identical */
+@media (max-width: 768px) {
+    .timeline-item:nth-child(even) {
+        padding-left: 3rem;
+        padding-right: 0;
+        text-align: left;
+        margin-right: 0;
+    }
+    
+    .timeline-item:nth-child(even)::before {
+        left: 2rem;
+        right: auto;
+    }
+    
+    .timeline-item:nth-child(even)::after {
+        left: 2rem;
+        right: auto;
+    }
+    
+    .timeline-item:nth-child(odd) {
+        margin-left: 0;
+        padding-left: 3rem;
+    }
+    
+    .timeline-item:nth-child(odd)::before {
+        left: 2rem;
+    }
+    
+    .timeline-item:nth-child(odd)::after {
+        left: 2rem;
+    }
 }
 
 
